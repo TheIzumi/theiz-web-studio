@@ -1,0 +1,1712 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f5ef">
+  <meta name="description" content="TheIz Car Wash Booking System demo. Book car wash services and manage appointments.">
+  <title>WashFlow | Car Wash Booking Demo by TheIz</title>
+
+  <style>
+    :root {
+      --bg: #f5f5ef;
+      --surface: #fff;
+      --text: #202923;
+      --muted: #6d786f;
+      --green: #426b50;
+      --green-dark: #31543d;
+      --green-light: #e8f0e7;
+      --border: #e2e6dd;
+      --amber: #a46b19;
+      --amber-light: #fff1d8;
+      --red: #ad4949;
+      --red-light: #fdeaea;
+      --blue: #406a9b;
+      --blue-light: #e8f0fc;
+      --radius: 16px;
+      --shadow: 0 8px 28px rgba(32,41,35,.055);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.55;
+      font-size: 14px;
+    }
+
+    button, input, select, textarea { font: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    button { cursor: pointer; }
+
+    a { color: inherit; text-decoration: none; }
+
+    .shell {
+      width: min(1180px, calc(100% - 32px));
+      margin: auto;
+    }
+
+    .topbar {
+      background: rgba(255,255,255,.92);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(12px);
+    }
+
+    .topbar-inner {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      min-width: 0;
+    }
+
+    .brand-icon {
+      width: 43px;
+      height: 43px;
+      display: grid;
+      place-items: center;
+      background: var(--green);
+      color: white;
+      border-radius: 13px;
+      font-size: 21px;
+    }
+
+    .brand-name {
+      font-weight: 800;
+      font-size: 19px;
+      letter-spacing: -.5px;
+    }
+
+    .brand-sub {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .demo-label {
+      color: var(--amber);
+      background: var(--amber-light);
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .btn {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 7px;
+      padding: 11px 15px;
+      border: 1px solid transparent;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 13px;
+      transition: .18s ease;
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+
+    .btn-primary {
+      color: white;
+      background: var(--green);
+    }
+
+    .btn-primary:hover { background: var(--green-dark); }
+
+    .btn-secondary {
+      color: var(--text);
+      background: white;
+      border-color: var(--border);
+    }
+
+    .btn-danger {
+      color: var(--red);
+      background: white;
+      border-color: #efcccc;
+    }
+
+    .btn-small {
+      padding: 7px 10px;
+      border-radius: 8px;
+      font-size: 12px;
+    }
+
+    .hero {
+      padding: 42px 0 25px;
+    }
+
+    .hero-panel {
+      position: relative;
+      overflow: hidden;
+      background: #e7eee4;
+      border: 1px solid #dbe5d8;
+      border-radius: 23px;
+      padding: 35px;
+      display: grid;
+      grid-template-columns: 1.4fr .6fr;
+      align-items: center;
+      gap: 25px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      color: var(--green-dark);
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1 {
+      font-size: clamp(31px, 4vw, 47px);
+      letter-spacing: -1.5px;
+      line-height: 1.1;
+      margin-bottom: 13px;
+      max-width: 650px;
+    }
+
+    .hero-copy p {
+      max-width: 580px;
+      color: #58665b;
+      margin-bottom: 22px;
+    }
+
+    .hero-art {
+      font-size: clamp(70px, 10vw, 125px);
+      text-align: center;
+      filter: drop-shadow(0 12px 12px rgba(49,84,61,.12));
+    }
+
+    .main {
+      padding: 10px 0 65px;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 23px;
+      border-bottom: 1px solid var(--border);
+      overflow-x: auto;
+    }
+
+    .tab {
+      flex-shrink: 0;
+      background: transparent;
+      border: 0;
+      border-bottom: 3px solid transparent;
+      padding: 14px 17px;
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    .tab.active {
+      color: var(--green-dark);
+      border-bottom-color: var(--green);
+    }
+
+    .panel { display: none; }
+    .panel.active { display: block; }
+
+    .section-title {
+      font-size: 23px;
+      letter-spacing: -.6px;
+      margin-bottom: 6px;
+    }
+
+    .section-desc {
+      color: var(--muted);
+      margin-bottom: 23px;
+      font-size: 13px;
+    }
+
+    .booking-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(260px, .65fr);
+      gap: 22px;
+      align-items: start;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+      min-width: 0;
+    }
+
+    .card-title {
+      font-size: 17px;
+      margin-bottom: 5px;
+    }
+
+    .card-desc {
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 22px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .field {
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .field.full { grid-column: 1 / -1; }
+
+    label {
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .required { color: var(--red); }
+
+    input, select, textarea {
+      width: 100%;
+      min-width: 0;
+      border: 1px solid #dce1d8;
+      background: #fff;
+      color: var(--text);
+      border-radius: 9px;
+      padding: 12px;
+      outline: none;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--green);
+      box-shadow: 0 0 0 3px rgba(66,107,80,.1);
+    }
+
+    textarea {
+      min-height: 85px;
+      resize: vertical;
+    }
+
+    .hint {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .service-options {
+      display: grid;
+      gap: 10px;
+    }
+
+    .service-option {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 13px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: .15s ease;
+    }
+
+    .service-option:has(input:checked) {
+      border-color: var(--green);
+      background: #f3f8f1;
+    }
+
+    .service-option input {
+      width: 17px;
+      height: 17px;
+      accent-color: var(--green);
+      flex-shrink: 0;
+    }
+
+    .service-emoji { font-size: 24px; }
+
+    .service-copy { flex: 1; min-width: 0; }
+
+    .service-copy strong {
+      display: block;
+      font-size: 13px;
+    }
+
+    .service-copy small {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .service-price {
+      white-space: nowrap;
+      font-weight: 800;
+      font-size: 14px;
+    }
+
+    .summary {
+      background: #f8faf6;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 17px;
+      margin-top: 20px;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 7px 0;
+      font-size: 12px;
+    }
+
+    .summary-row span:first-child { color: var(--muted); }
+
+    .summary-total {
+      border-top: 1px solid var(--border);
+      margin-top: 8px;
+      padding-top: 13px;
+      font-size: 16px;
+      font-weight: 800;
+    }
+
+    .form-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .form-actions .btn { flex: 1; }
+
+    .info-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px;
+      margin-bottom: 16px;
+    }
+
+    .info-card h3 {
+      font-size: 15px;
+      margin-bottom: 13px;
+    }
+
+    .info-line {
+      display: flex;
+      gap: 10px;
+      padding: 9px 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .info-line span:first-child {
+      width: 23px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .notice {
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-size: 12px;
+      margin-bottom: 18px;
+    }
+
+    .notice-demo {
+      color: #78541d;
+      background: var(--amber-light);
+      border: 1px solid #f3e0b8;
+    }
+
+    .notice-success {
+      color: var(--green-dark);
+      background: var(--green-light);
+      border: 1px solid #d6e6d3;
+    }
+
+    .notice-error {
+      color: var(--red);
+      background: var(--red-light);
+      border: 1px solid #f3d4d4;
+    }
+
+    .success-box {
+      display: none;
+      background: var(--green-light);
+      border: 1px solid #d2e2d0;
+      padding: 20px;
+      border-radius: 13px;
+      margin-bottom: 18px;
+    }
+
+    .success-box h3 { color: var(--green-dark); }
+    .success-box p { color: #526555; font-size: 13px; }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+
+    .stat {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      padding: 18px;
+    }
+
+    .stat-label {
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 9px;
+    }
+
+    .stat-value {
+      font-size: 27px;
+      font-weight: 800;
+      letter-spacing: -.7px;
+    }
+
+    .stat-icon { font-size: 17px; }
+
+    .dashboard-tools {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+      align-items: center;
+    }
+
+    .dashboard-tools input {
+      flex: 1;
+      min-width: 170px;
+    }
+
+    .dashboard-tools select { width: auto; min-width: 145px; }
+
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: white;
+    }
+
+    table {
+      width: 100%;
+      min-width: 800px;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+
+    th, td {
+      padding: 14px 13px;
+      text-align: left;
+      vertical-align: top;
+      border-bottom: 1px solid #edf0e9;
+    }
+
+    th {
+      color: var(--muted);
+      background: #fafbf8;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .7px;
+    }
+
+    tbody tr:last-child td { border-bottom: 0; }
+
+    .customer-name { font-weight: 700; }
+
+    .secondary-text {
+      color: var(--muted);
+      font-size: 11px;
+      margin-top: 3px;
+      overflow-wrap: anywhere;
+    }
+
+    .status {
+      display: inline-flex;
+      border-radius: 999px;
+      padding: 5px 9px;
+      font-size: 10px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .status-pending {
+      background: var(--amber-light);
+      color: var(--amber);
+    }
+
+    .status-confirmed {
+      background: var(--blue-light);
+      color: var(--blue);
+    }
+
+    .status-completed {
+      background: var(--green-light);
+      color: var(--green-dark);
+    }
+
+    .status-cancelled {
+      background: var(--red-light);
+      color: var(--red);
+    }
+
+    .row-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      min-width: 130px;
+    }
+
+    .empty-state {
+      padding: 40px 18px;
+      text-align: center;
+      color: var(--muted);
+    }
+
+    .empty-state strong {
+      display: block;
+      color: var(--text);
+      margin-bottom: 7px;
+    }
+
+    .admin-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(290px, .7fr);
+      gap: 22px;
+      align-items: start;
+    }
+
+    .admin-form-card { margin-bottom: 22px; }
+
+    .admin-form-card[hidden] { display: none; }
+
+    .footer {
+      padding: 24px 0;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .footer strong { color: var(--text); }
+
+    .toast {
+      position: fixed;
+      z-index: 100;
+      bottom: 22px;
+      left: 50%;
+      transform: translate(-50%, 20px);
+      opacity: 0;
+      pointer-events: none;
+      background: #24372a;
+      color: white;
+      padding: 13px 18px;
+      border-radius: 11px;
+      box-shadow: var(--shadow);
+      font-size: 13px;
+      max-width: calc(100% - 30px);
+      transition: .2s ease;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    @media (max-width: 900px) {
+      .booking-layout, .admin-layout { grid-template-columns: 1fr; }
+      .hero-panel { grid-template-columns: 1fr .35fr; padding: 28px; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 600px) {
+      .shell { width: calc(100% - 24px); }
+      .topbar-inner { min-height: 64px; }
+      .brand-name { font-size: 16px; }
+      .brand-icon { width: 38px; height: 38px; }
+      .demo-label { display: none; }
+      .top-actions .btn { padding: 9px 10px; font-size: 11px; }
+      .hero { padding-top: 23px; }
+      .hero-panel { grid-template-columns: 1fr; padding: 24px; gap: 0; }
+      .hero-art { display: none; }
+      h1 { font-size: 34px; }
+      .hero-copy p { font-size: 13px; }
+      .card { padding: 17px; }
+      .form-grid { grid-template-columns: 1fr; }
+      .field.full { grid-column: auto; }
+      .stats-grid { gap: 9px; }
+      .stat { padding: 13px; }
+      .stat-value { font-size: 23px; }
+      .section-title { font-size: 21px; }
+      .service-price { font-size: 12px; }
+      .service-option { gap: 8px; padding: 10px; }
+      .service-emoji { font-size: 21px; }
+      .service-copy strong { font-size: 12px; }
+      .service-copy small { font-size: 10px; }
+      .dashboard-tools { align-items: stretch; }
+      .dashboard-tools input, .dashboard-tools select { width: 100%; }
+      .dashboard-tools .btn { width: 100%; }
+      .tabs { margin-right: -12px; }
+      .tab { padding: 12px; }
+    }
+  </style>
+</head>
+
+<body>
+
+<header class="topbar">
+  <div class="shell topbar-inner">
+    <a class="brand" href="#home" aria-label="WashFlow home">
+      <span class="brand-icon">✦</span>
+      <span>
+        <span class="brand-name">WashFlow</span>
+        <span class="brand-sub" style="display:block">Car Wash Booking</span>
+      </span>
+    </a>
+
+    <div class="top-actions">
+      <span class="demo-label">PORTFOLIO DEMO</span>
+      <button class="btn btn-primary" type="button" data-tab="booking">
+        + New Booking
+      </button>
+    </div>
+  </div>
+</header>
+
+<section class="hero" id="home">
+  <div class="shell">
+    <div class="hero-panel">
+      <div class="hero-copy">
+        <span class="eyebrow">A smarter way to manage bookings</span>
+        <h1>Goodbye messy lists.<br>Hello organised bookings.</h1>
+        <p>
+          A sample car wash booking experience for customers
+          and a simple management dashboard for the team.
+        </p>
+        <button class="btn btn-primary" type="button" data-tab="booking">
+          Book a Wash →
+        </button>
+        <button class="btn btn-secondary" type="button" data-tab="admin">
+          View Admin Dashboard
+        </button>
+      </div>
+      <div class="hero-art" aria-hidden="true">🚘</div>
+    </div>
+  </div>
+</section>
+
+<main class="main shell">
+
+  <div class="notice notice-demo">
+    <strong>Demo environment:</strong>
+    This is a sample application by TheIz Web Studio.
+    Data is stored only in this browser. Do not enter sensitive
+    or real customer information.
+  </div>
+
+  <nav class="tabs" aria-label="Application sections">
+    <button class="tab active" type="button" data-tab="booking">
+      Customer Booking
+    </button>
+    <button class="tab" type="button" data-tab="admin">
+      Admin Dashboard
+    </button>
+  </nav>
+
+  <!-- CUSTOMER BOOKING -->
+
+  <section class="panel active" id="bookingPanel">
+    <div class="section-title">Book your car wash</div>
+    <p class="section-desc">
+      Select a service and preferred time. All fields marked * are required.
+    </p>
+
+    <div class="success-box" id="successBox" role="status" aria-live="polite">
+      <h3>✓ Booking saved successfully!</h3>
+      <p id="successMessage"></p>
+      <button class="btn btn-primary btn-small" type="button" data-tab="admin">
+        View in Dashboard
+      </button>
+    </div>
+
+    <div class="booking-layout">
+      <form class="card" id="customerForm">
+        <h2 class="card-title">Your booking details</h2>
+        <p class="card-desc">Tell us a little about your visit.</p>
+
+        <div class="form-grid">
+          <div class="field full">
+            <label for="customerName">Full name <span class="required">*</span></label>
+            <input id="customerName" name="customerName" required
+              maxlength="80" autocomplete="name" placeholder="e.g. Ahmad bin Ali">
+          </div>
+
+          <div class="field">
+            <label for="customerPhone">Phone number <span class="required">*</span></label>
+            <input id="customerPhone" name="customerPhone" required
+              maxlength="25" autocomplete="tel" type="tel"
+              placeholder="e.g. 0123456789">
+          </div>
+
+          <div class="field">
+            <label for="plate">Vehicle registration <span class="required">*</span></label>
+            <input id="plate" name="plate" required maxlength="15"
+              placeholder="e.g. VAB1234" style="text-transform:uppercase">
+          </div>
+
+          <div class="field">
+            <label for="vehicleName">Vehicle model <span class="required">*</span></label>
+            <input id="vehicleName" name="vehicleName" required maxlength="60"
+              placeholder="e.g. Perodua Myvi">
+          </div>
+
+          <div class="field">
+            <label for="vehicleColor">Vehicle colour <span class="required">*</span></label>
+            <input id="vehicleColor" name="vehicleColor" required maxlength="30"
+              placeholder="e.g. White">
+          </div>
+
+          <div class="field full">
+            <label>Choose a wash package <span class="required">*</span></label>
+            <div class="service-options" id="serviceOptions">
+              <label class="service-option">
+                <input type="radio" name="service" value="Basic Wash" checked>
+                <span class="service-emoji">🚿</span>
+                <span class="service-copy">
+                  <strong>Basic Wash</strong>
+                  <small>Exterior wash and dry</small>
+                </span>
+                <span class="service-price">RM15</span>
+              </label>
+
+              <label class="service-option">
+                <input type="radio" name="service" value="Wash & Vacuum">
+                <span class="service-emoji">🧹</span>
+                <span class="service-copy">
+                  <strong>Wash & Vacuum</strong>
+                  <small>Exterior wash plus interior vacuum</small>
+                </span>
+                <span class="service-price">RM25</span>
+              </label>
+
+              <label class="service-option">
+                <input type="radio" name="service" value="Premium Wash">
+                <span class="service-emoji">✨</span>
+                <span class="service-copy">
+                  <strong>Premium Wash</strong>
+                  <small>Exterior wash, vacuum and interior wipe</small>
+                </span>
+                <span class="service-price">RM40</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="bookingDate">Preferred date <span class="required">*</span></label>
+            <input type="date" id="bookingDate" name="bookingDate" required>
+          </div>
+
+          <div class="field">
+            <label for="bookingTime">Preferred time <span class="required">*</span></label>
+            <select id="bookingTime" name="bookingTime" required>
+              <option value="">Select a time</option>
+              <option>09:00</option>
+              <option>10:00</option>
+              <option>11:00</option>
+              <option>12:00</option>
+              <option>13:00</option>
+              <option>14:00</option>
+              <option>15:00</option>
+              <option>16:00</option>
+              <option>17:00</option>
+            </select>
+          </div>
+
+          <div class="field full">
+            <label for="customerNotes">Additional notes (optional)</label>
+            <textarea id="customerNotes" name="customerNotes" maxlength="300"
+              placeholder="Any special requests?"></textarea>
+          </div>
+        </div>
+
+        <div class="summary">
+          <div class="summary-row">
+            <span>Selected service</span>
+            <strong id="summaryService">Basic Wash</strong>
+          </div>
+          <div class="summary-row">
+            <span>Booking date</span>
+            <strong id="summaryDate">Not selected</strong>
+          </div>
+          <div class="summary-row">
+            <span>Preferred time</span>
+            <strong id="summaryTime">Not selected</strong>
+          </div>
+          <div class="summary-row summary-total">
+            <span>Estimated price</span>
+            <strong id="summaryPrice">RM15.00</strong>
+          </div>
+        </div>
+
+        <div id="customerError" class="notice notice-error" hidden
+          style="margin-top:15px;margin-bottom:0" role="alert"></div>
+
+        <div class="form-actions">
+          <button class="btn btn-primary" type="submit">Submit Booking →</button>
+          <button class="btn btn-secondary" type="reset">Clear Form</button>
+        </div>
+      </form>
+
+      <aside>
+        <div class="info-card">
+          <h3>📍 Demo service information</h3>
+          <div class="info-line">
+            <span>🕘</span>
+            <span>Sample opening hours: 9:00 AM – 6:00 PM</span>
+          </div>
+          <div class="info-line">
+            <span>📅</span>
+            <span>Choose your preferred date and time. Availability is not checked against a live calendar.</span>
+          </div>
+          <div class="info-line">
+            <span>💳</span>
+            <span>No online payment is processed in this demo.</span>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <h3>How it works</h3>
+          <div class="info-line">
+            <span>1.</span>
+            <span>Fill in your vehicle and contact details.</span>
+          </div>
+          <div class="info-line">
+            <span>2.</span>
+            <span>Select a package and preferred appointment.</span>
+          </div>
+          <div class="info-line">
+            <span>3.</span>
+            <span>Your sample booking appears in the admin dashboard.</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ADMIN DASHBOARD -->
+
+  <section class="panel" id="adminPanel">
+    <div class="section-title">Booking dashboard</div>
+    <p class="section-desc">
+      Review appointments and add bookings for walk-in customers.
+    </p>
+
+    <div class="notice notice-demo">
+      <strong>Demo access:</strong>
+      This dashboard has no login or access control.
+      Anyone who opens this page can view and edit the demo data.
+      Do not use it for confidential or real customer records.
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat">
+        <div class="stat-label">Total Bookings <span class="stat-icon">📋</span></div>
+        <div class="stat-value" id="statTotal">0</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Pending <span class="stat-icon">⏳</span></div>
+        <div class="stat-value" id="statPending">0</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Confirmed <span class="stat-icon">✓</span></div>
+        <div class="stat-value" id="statConfirmed">0</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Completed <span class="stat-icon">✨</span></div>
+        <div class="stat-value" id="statCompleted">0</div>
+      </div>
+    </div>
+
+    <div class="admin-layout">
+      <div class="card">
+        <h2 class="card-title">All bookings</h2>
+        <p class="card-desc">Search, filter and update appointment status.</p>
+
+        <div class="dashboard-tools">
+          <input id="searchBookings" type="search"
+            placeholder="Search name, plate or phone..."
+            aria-label="Search bookings">
+          <select id="filterStatus" aria-label="Filter by booking status">
+            <option value="all">All statuses</option>
+            <option value="Pending">Pending</option>
+            <option value="Confirmed">Confirmed</option>
+            <option value="Completed">Completed</option>
+            <option value="Cancelled">Cancelled</option>
+          </select>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Customer / Vehicle</th>
+                <th>Service</th>
+                <th>Date & Time</th>
+                <th>Price</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="bookingTable"></tbody>
+          </table>
+          <div class="empty-state" id="emptyBookings" hidden>
+            <strong>No bookings found</strong>
+            Try another search or add a new booking.
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="card admin-form-card">
+          <h2 class="card-title">+ Add a booking</h2>
+          <p class="card-desc">
+            Enter a booking on behalf of a walk-in or phone customer.
+          </p>
+
+          <form id="adminForm">
+            <div class="form-grid">
+              <div class="field full">
+                <label for="adminName">Customer name *</label>
+                <input id="adminName" required maxlength="80">
+              </div>
+
+              <div class="field">
+                <label for="adminPhone">Phone *</label>
+                <input id="adminPhone" required maxlength="25" type="tel">
+              </div>
+
+              <div class="field">
+                <label for="adminPlate">Registration *</label>
+                <input id="adminPlate" required maxlength="15"
+                  style="text-transform:uppercase">
+              </div>
+
+              <div class="field">
+                <label for="adminVehicle">Vehicle model *</label>
+                <input id="adminVehicle" required maxlength="60">
+              </div>
+
+              <div class="field">
+                <label for="adminColor">Colour *</label>
+                <input id="adminColor" required maxlength="30">
+              </div>
+
+              <div class="field full">
+                <label for="adminService">Package *</label>
+                <select id="adminService" required>
+                  <option value="Basic Wash">Basic Wash — RM15</option>
+                  <option value="Wash & Vacuum">Wash & Vacuum — RM25</option>
+                  <option value="Premium Wash">Premium Wash — RM40</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="adminDate">Date *</label>
+                <input type="date" id="adminDate" required>
+              </div>
+
+              <div class="field">
+                <label for="adminTime">Time *</label>
+                <select id="adminTime" required>
+                  <option>09:00</option>
+                  <option>10:00</option>
+                  <option>11:00</option>
+                  <option>12:00</option>
+                  <option>13:00</option>
+                  <option>14:00</option>
+                  <option>15:00</option>
+                  <option>16:00</option>
+                  <option>17:00</option>
+                </select>
+              </div>
+
+              <div class="field full">
+                <label for="adminStatus">Initial status</label>
+                <select id="adminStatus">
+                  <option>Confirmed</option>
+                  <option>Pending</option>
+                </select>
+              </div>
+
+              <div class="field full">
+                <label for="adminNotes">Notes (optional)</label>
+                <textarea id="adminNotes" maxlength="300"
+                  placeholder="Walk-in, customer request, etc."></textarea>
+              </div>
+            </div>
+
+            <div id="adminError" class="notice notice-error"
+              hidden role="alert" style="margin-top:14px;margin-bottom:0"></div>
+
+            <div class="form-actions">
+              <button class="btn btn-primary" type="submit">Save Booking</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="info-card">
+          <h3>Demo tools</h3>
+          <div class="info-line">
+            <span>💾</span>
+            <span>Bookings are saved in this browser's local storage.</span>
+          </div>
+          <div class="info-line">
+            <span>📤</span>
+            <span>Export the current booking records as a CSV file.</span>
+          </div>
+          <div class="form-actions">
+            <button class="btn btn-secondary" id="exportCsv" type="button">
+              Export CSV
+            </button>
+            <button class="btn btn-danger" id="resetDemo" type="button">
+              Reset Demo Data
+            </button>
+          </div>
+          <p class="hint" style="margin:13px 0 0">
+            Reset clears the bookings in this browser and restores the example data.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="shell footer-inner">
+    <span><strong>WashFlow</strong> · A booking system concept by TheIz Web Studio.</span>
+    <span>Portfolio demo · Not for live customer data.</span>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+  "use strict";
+
+  const STORAGE_KEY = "theiz_washflow_demo_v1";
+
+  const SERVICE_PRICES = {
+    "Basic Wash": 15,
+    "Wash & Vacuum": 25,
+    "Premium Wash": 40
+  };
+
+  const VALID_STATUSES = [
+    "Pending",
+    "Confirmed",
+    "Completed",
+    "Cancelled"
+  ];
+
+  const $ = (id) => document.getElementById(id);
+
+  function localDateString(date = new Date()) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  }
+
+  function dateOffset(days) {
+    const date = new Date();
+    date.setHours(12, 0, 0, 0);
+    date.setDate(date.getDate() + days);
+    return localDateString(date);
+  }
+
+  function createId() {
+    return "BK-" + Date.now().toString(36).toUpperCase()
+      + "-" + Math.random().toString(36).slice(2, 6).toUpperCase();
+  }
+
+  function exampleBookings() {
+    return [
+      {
+        id: "DEMO-1001",
+        name: "Amir Hakim",
+        phone: "0123456789",
+        plate: "VAB1234",
+        vehicle: "Perodua Myvi",
+        color: "White",
+        service: "Wash & Vacuum",
+        date: dateOffset(1),
+        time: "10:00",
+        notes: "Example booking",
+        status: "Pending",
+        source: "Demo sample",
+        createdAt: new Date().toISOString()
+      },
+      {
+        id: "DEMO-1002",
+        name: "Siti Aisyah",
+        phone: "0139876543",
+        plate: "BXY5678",
+        vehicle: "Honda City",
+        color: "Silver",
+        service: "Premium Wash",
+        date: dateOffset(1),
+        time: "14:00",
+        notes: "Example booking",
+        status: "Confirmed",
+        source: "Demo sample",
+        createdAt: new Date().toISOString()
+      },
+      {
+        id: "DEMO-1003",
+        name: "Daniel Lee",
+        phone: "0162233445",
+        plate: "WQA9012",
+        vehicle: "Proton X50",
+        color: "Grey",
+        service: "Basic Wash",
+        date: dateOffset(2),
+        time: "11:00",
+        notes: "Example booking",
+        status: "Completed",
+        source: "Demo sample",
+        createdAt: new Date().toISOString()
+      }
+    ];
+  }
+
+  function loadBookings() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+
+      if (raw === null) {
+        const initial = exampleBookings();
+        saveBookings(initial);
+        return initial;
+      }
+
+      const parsed = JSON.parse(raw);
+
+      if (!Array.isArray(parsed)) {
+        throw new Error("Invalid booking data");
+      }
+
+      return parsed.filter((booking) =>
+        booking &&
+        typeof booking.id === "string" &&
+        typeof booking.name === "string" &&
+        SERVICE_PRICES[booking.service] !== undefined &&
+        VALID_STATUSES.includes(booking.status)
+      );
+    } catch (error) {
+      console.error("Unable to load demo bookings:", error);
+      return [];
+    }
+  }
+
+  let bookings = loadBookings();
+
+  function saveBookings(data = bookings) {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+      return true;
+    } catch (error) {
+      console.error("Unable to save demo bookings:", error);
+      showToast("Could not save data in this browser.");
+      return false;
+    }
+  }
+
+  function escapeHtml(value) {
+    return String(value ?? "").replace(/[&<>"']/g, (character) => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;"
+    })[character]);
+  }
+
+  function formatMoney(value) {
+    return "RM" + Number(value).toFixed(2);
+  }
+
+  function formatDate(value) {
+    if (!value) return "—";
+
+    const parts = value.split("-").map(Number);
+    if (parts.length !== 3 || parts.some(Number.isNaN)) return value;
+
+    const date = new Date(parts[0], parts[1] - 1, parts[2], 12);
+    return date.toLocaleDateString("en-MY", {
+      day: "2-digit",
+      month: "short",
+      year: "numeric"
+    });
+  }
+
+  function getServicePrice(service) {
+    return SERVICE_PRICES[service] || 0;
+  }
+
+  function showToast(message) {
+    const toast = $("toast");
+    toast.textContent = message;
+    toast.classList.add("show");
+
+    clearTimeout(showToast.timeout);
+    showToast.timeout = setTimeout(() => {
+      toast.classList.remove("show");
+    }, 2800);
+  }
+
+  function showError(id, message) {
+    const element = $(id);
+    element.textContent = message;
+    element.hidden = false;
+  }
+
+  function clearError(id) {
+    const element = $(id);
+    element.textContent = "";
+    element.hidden = true;
+  }
+
+  function switchTab(name) {
+    const validTabs = ["booking", "admin"];
+    if (!validTabs.includes(name)) return;
+
+    document.querySelectorAll(".tab").forEach((tab) => {
+      tab.classList.toggle("active", tab.dataset.tab === name);
+    });
+
+    $("bookingPanel").classList.toggle("active", name === "booking");
+    $("adminPanel").classList.toggle("active", name === "admin");
+
+    if (name === "admin") renderDashboard();
+
+    window.scrollTo({
+      top: document.querySelector(".tabs").getBoundingClientRect().top
+        + window.scrollY - 85,
+      behavior: "smooth"
+    });
+  }
+
+  document.querySelectorAll("[data-tab]").forEach((button) => {
+    button.addEventListener("click", () => switchTab(button.dataset.tab));
+  });
+
+  function selectedCustomerService() {
+    return document.querySelector('input[name="service"]:checked')?.value
+      || "Basic Wash";
+  }
+
+  function updateBookingSummary() {
+    const service = selectedCustomerService();
+    const date = $("bookingDate").value;
+    const time = $("bookingTime").value;
+
+    $("summaryService").textContent = service;
+    $("summaryPrice").textContent = formatMoney(getServicePrice(service));
+    $("summaryDate").textContent = date ? formatDate(date) : "Not selected";
+    $("summaryTime").textContent = time || "Not selected";
+  }
+
+  function setDateMinimums() {
+    const today = localDateString();
+    $("bookingDate").min = today;
+    $("adminDate").min = today;
+
+    if (!$("bookingDate").value) $("bookingDate").value = today;
+    if (!$("adminDate").value) $("adminDate").value = today;
+  }
+
+  $("serviceOptions").addEventListener("change", updateBookingSummary);
+  $("bookingDate").addEventListener("change", updateBookingSummary);
+  $("bookingTime").addEventListener("change", updateBookingSummary);
+
+  $("customerForm").addEventListener("reset", () => {
+    setTimeout(() => {
+      $("bookingDate").value = localDateString();
+      updateBookingSummary();
+      clearError("customerError");
+    }, 0);
+  });
+
+  function normalisePlate(value) {
+    return value.trim().toUpperCase().replace(/\s+/g, "");
+  }
+
+  function validateDateTime(date, time, errorId) {
+    if (!date || !time) {
+      showError(errorId, "Please select a date and time.");
+      return false;
+    }
+
+    if (date < localDateString()) {
+      showError(errorId, "Please choose today or a future date.");
+      return false;
+    }
+
+    const hour = Number(time.split(":")[0]);
+
+    if (!Number.isInteger(hour) || hour < 9 || hour > 17) {
+      showError(errorId, "Please select a time between 09:00 and 17:00.");
+      return false;
+    }
+
+    clearError(errorId);
+    return true;
+  }
+
+  function addBooking(data) {
+    const booking = {
+      id: createId(),
+      ...data,
+      plate: normalisePlate(data.plate),
+      status: data.status || "Pending",
+      source: data.source || "Online",
+      createdAt: new Date().toISOString()
+    };
+
+    bookings.unshift(booking);
+
+    if (!saveBookings()) {
+      bookings.shift();
+      return null;
+    }
+
+    renderDashboard();
+    return booking;
+  }
+
+  $("customerForm").addEventListener("submit", (event) => {
+    event.preventDefault();
+    clearError("customerError");
+
+    const name = $("customerName").value.trim();
+    const phone = $("customerPhone").value.trim();
+    const plate = normalisePlate($("plate").value);
+    const vehicle = $("vehicleName").value.trim();
+    const color = $("vehicleColor").value.trim();
+    const service = selectedCustomerService();
+    const date = $("bookingDate").value;
+    const time = $("bookingTime").value;
+    const notes = $("customerNotes").value.trim();
+
+    if (!name || !phone || !plate || !vehicle || !color) {
+      showError("customerError", "Please complete all required fields.");
+      return;
+    }
+
+    if (!validateDateTime(date, time, "customerError")) return;
+
+    const booking = addBooking({
+      name, phone, plate, vehicle, color, service, date, time,
+      notes, status: "Pending", source: "Online demo"
+    });
+
+    if (!booking) return;
+
+    $("successMessage").textContent =
+      `Reference: ${booking.id}. ${booking.name}, your ${booking.service} ` +
+      `booking for ${formatDate(booking.date)} at ${booking.time} has been ` +
+      "saved as Pending in this demo.";
+
+    $("successBox").style.display = "block";
+    $("successBox").scrollIntoView({ behavior: "smooth", block: "nearest" });
+
+    $("customerForm").reset();
+    showToast("Demo booking saved.");
+  });
+
+  $("adminForm").addEventListener("submit", (event) => {
+    event.preventDefault();
+    clearError("adminError");
+
+    const data = {
+      name: $("adminName").value.trim(),
+      phone: $("adminPhone").value.trim(),
+      plate: normalisePlate($("adminPlate").value),
+      vehicle: $("adminVehicle").value.trim(),
+      color: $("adminColor").value.trim(),
+      service: $("adminService").value,
+      date: $("adminDate").value,
+      time: $("adminTime").value,
+      status: $("adminStatus").value,
+      notes: $("adminNotes").value.trim(),
+      source: "Admin / walk-in"
+    };
+
+    if (!data.name || !data.phone || !data.plate ||
+        !data.vehicle || !data.color) {
+      showError("adminError", "Please complete all required fields.");
+      return;
+    }
+
+    if (!VALID_STATUSES.includes(data.status) ||
+        getServicePrice(data.service) === 0) {
+      showError("adminError", "Please select a valid service and status.");
+      return;
+    }
+
+    if (!validateDateTime(data.date, data.time, "adminError")) return;
+
+    const booking = addBooking(data);
+    if (!booking) return;
+
+    $("adminForm").reset();
+    $("adminDate").value = localDateString();
+    $("adminStatus").value = "Confirmed";
+
+    renderDashboard();
+    showToast("Walk-in booking added.");
+  });
+
+  function statusClass(status) {
+    return {
+      "Pending": "status-pending",
+      "Confirmed": "status-confirmed",
+      "Completed": "status-completed",
+      "Cancelled": "status-cancelled"
+    }[status] || "status-pending";
+  }
+
+  function renderDashboard() {
+    $("statTotal").textContent = bookings.length;
+    $("statPending").textContent =
+      bookings.filter((b) => b.status === "Pending").length;
+    $("statConfirmed").textContent =
+      bookings.filter((b) => b.status === "Confirmed").length;
+    $("statCompleted").textContent =
+      bookings.filter((b) => b.status === "Completed").length;
+
+    const query = $("searchBookings").value.trim().toLowerCase();
+    const filter = $("filterStatus").value;
+
+    const filtered = bookings.filter((booking) => {
+      const searchable = [
+        booking.id, booking.name, booking.phone,
+        booking.plate, booking.vehicle, booking.service
+      ].join(" ").toLowerCase();
+
+      return searchable.includes(query) &&
+        (filter === "all" || booking.status === filter);
+    });
+
+    $("bookingTable").innerHTML = filtered.map((booking) => {
+      const safeId = escapeHtml(booking.id);
+
+      return `
+        <tr>
+          <td>
+            <div class="customer-name">${escapeHtml(booking.name)}</div>
+            <div class="secondary-text">${escapeHtml(booking.phone)}</div>
+            <div class="secondary-text">${escapeHtml(booking.plate)} · ${escapeHtml(booking.vehicle)}</div>
+            <div class="secondary-text">${escapeHtml(booking.color)}</div>
+          </td>
+          <td>
+            ${escapeHtml(booking.service)}
+            <div class="secondary-text">${escapeHtml(booking.source || "Booking")}</div>
+          </td>
+          <td>
+            ${escapeHtml(formatDate(booking.date))}
+            <div class="secondary-text">${escapeHtml(booking.time)}</div>
+          </td>
+          <td><strong>${formatMoney(getServicePrice(booking.service))}</strong></td>
+          <td>
+            <span class="status ${statusClass(booking.status)}">
+              ${escapeHtml(booking.status)}
+            </span>
+          </td>
+          <td>
+            <div class="row-actions">
+              ${booking.status === "Pending" ? `
+                <button class="btn btn-primary btn-small"
+                  data-action="confirm" data-id="${safeId}">Confirm</button>
+              ` : ""}
+              ${booking.status === "Confirmed" ? `
+                <button class="btn btn-primary btn-small"
+                  data-action="complete" data-id="${safeId}">Complete</button>
+              ` : ""}
+              ${booking.status !== "Cancelled" &&
+                booking.status !== "Completed" ? `
+                <button class="btn btn-danger btn-small"
+                  data-action="cancel" data-id="${safeId}">Cancel</button>
+              ` : ""}
+              <button class="btn btn-secondary btn-small"
+                data-action="delete" data-id="${safeId}">Delete</button>
+            </div>
+          </td>
+        </tr>
+      `;
+    }).join("");
+
+    $("emptyBookings").hidden = filtered.length !== 0;
+  }
+
+  $("bookingTable").addEventListener("click", (event) => {
+    const button = event.target.closest("button[data-action]");
+    if (!button) return;
+
+    const id = button.dataset.id;
+    const action = button.dataset.action;
+    const index = bookings.findIndex((booking) => booking.id === id);
+
+    if (index < 0) return;
+
+    const booking = bookings[index];
+
+    if (action === "delete") {
+      if (!confirm(`Delete booking ${booking.id}? This cannot be undone.`)) return;
+
+      const previous = bookings;
+      bookings = bookings.filter((item) => item.id !== id);
+
+      if (!saveBookings()) {
+        bookings = previous;
+        renderDashboard();
+        return;
+      }
+
+      renderDashboard();
+      showToast("Booking deleted.");
+      return;
+    }
+
+    const nextStatus = {
+      confirm: "Confirmed",
+      complete: "Completed",
+      cancel: "Cancelled"
+    }[action];
+
+    if (!nextStatus) return;
+
+    const previousStatus = booking.status;
+    booking.status = nextStatus;
+
+    if (!saveBookings()) {
+      booking.status = previousStatus;
+      renderDashboard();
+      return;
+    }
+
+    renderDashboard();
+    showToast(`Booking ${nextStatus.toLowerCase()}.`);
+  });
+
+  $("searchBookings").addEventListener("input", renderDashboard);
+  $("filterStatus").addEventListener("change", renderDashboard);
+
+  function csvCell(value) {
+    let text = String(value ?? "");
+
+    // Prevent spreadsheet formula injection in exported text fields.
+    if (/^[\s]*[=+\-@]/.test(text)) text = "'" + text;
+
+    return '"' + text.replace(/"/g, '""') + '"';
+  }
+
+  $("exportCsv").addEventListener("click", () => {
+    const headers = [
+      "Reference", "Customer", "Phone", "Registration", "Vehicle",
+      "Colour", "Service", "Price_RM", "Date", "Time", "Status",
+      "Source", "Notes", "Created_At"
+    ];
+
+    const rows = bookings.map((b) => [
+      b.id, b.name, b.phone, b.plate, b.vehicle, b.color, b.service,
+      getServicePrice(b.service), b.date, b.time, b.status, b.source,
+      b.notes, b.createdAt
+    ]);
+
+    const csv = [headers, ...rows]
+      .map((row) => row.map(csvCell).join(","))
+      .join("\r\n");
+
+    const blob = new Blob(["\uFEFF" + csv], {
+      type: "text/csv;charset=utf-8;"
+    });
+
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "washflow-demo-bookings.csv";
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    URL.revokeObjectURL(url);
+
+    showToast("CSV export prepared.");
+  });
+
+  $("resetDemo").addEventListener("click", () => {
+    const confirmed = confirm(
+      "Reset this browser's demo bookings to the original examples? " +
+      "Any bookings you added here will be removed."
+    );
+
+    if (!confirmed) return;
+
+    const original = bookings;
+    bookings = exampleBookings();
+
+    if (!saveBookings()) {
+      bookings = original;
+      renderDashboard();
+      return;
+    }
+
+    $("searchBookings").value = "";
+    $("filterStatus").value = "all";
+    renderDashboard();
+    showToast("Demo data restored.");
+  });
+
+  setDateMinimums();
+  $("adminStatus").value = "Confirmed";
+  updateBookingSummary();
+  renderDashboard();
+</script>
+
+</body>
+</html>
