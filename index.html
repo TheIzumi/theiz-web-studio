@@ -1,0 +1,637 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f8f7f3">
+  <meta name="description" content="TheIz Web Studio builds professional business websites and custom web systems for small businesses.">
+  <title>TheIz Web Studio | Websites & Custom Systems</title>
+
+  <style>
+    :root {
+      --bg: #f8f7f3;
+      --paper: #ffffff;
+      --ink: #202b29;
+      --muted: #68736f;
+      --accent: #286b60;
+      --pale: #e2eee8;
+      --line: #e3e5df;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.7;
+    }
+
+    a { color: inherit; }
+
+    .container {
+      width: min(1080px, 90%);
+      margin: auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      background: rgba(248, 247, 243, .95);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(12px);
+    }
+
+    nav {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 1.35rem;
+      font-weight: 850;
+      letter-spacing: -1px;
+      text-decoration: none;
+    }
+
+    .logo span { color: var(--accent); }
+
+    .links {
+      display: flex;
+      gap: 23px;
+      align-items: center;
+    }
+
+    .links a {
+      font-size: .9rem;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .links a:hover { color: var(--accent); }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--accent);
+      color: white;
+      text-decoration: none;
+      padding: 12px 20px;
+      border-radius: 999px;
+      font-weight: 700;
+      border: 1px solid var(--accent);
+      transition: .2s;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      background: #1d5149;
+    }
+
+    .btn.outline {
+      background: transparent;
+      color: var(--accent);
+    }
+
+    .hero { padding: 100px 0 90px; }
+
+    .eyebrow {
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: .75rem;
+      font-weight: 800;
+    }
+
+    h1 {
+      font-size: clamp(2.7rem, 7vw, 5.3rem);
+      line-height: 1.06;
+      letter-spacing: -3px;
+      max-width: 850px;
+      margin: 18px 0 22px;
+    }
+
+    h1 em {
+      color: var(--accent);
+      font-style: normal;
+    }
+
+    .intro {
+      max-width: 620px;
+      color: var(--muted);
+      font-size: 1.1rem;
+    }
+
+    .actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    .note {
+      color: var(--muted);
+      font-size: .84rem;
+      margin-top: 24px;
+    }
+
+    section { padding: 76px 0; }
+
+    .section-head {
+      max-width: 650px;
+      margin-bottom: 32px;
+    }
+
+    h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.15;
+      letter-spacing: -1.5px;
+      margin: 10px 0 15px;
+    }
+
+    .muted { color: var(--muted); }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 25px;
+    }
+
+    .symbol {
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      background: var(--pale);
+      border-radius: 14px;
+      color: var(--accent);
+      font-size: 1.35rem;
+      font-weight: 800;
+      margin-bottom: 20px;
+    }
+
+    h3 {
+      font-size: 1.15rem;
+      margin: 0 0 9px;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: .94rem;
+    }
+
+    .price {
+      font-size: 1.5rem;
+      font-weight: 850;
+      margin: 15px 0 5px;
+    }
+
+    .soft { background: #eff1eb; }
+
+    .project {
+      overflow: hidden;
+      padding: 0;
+    }
+
+    .project-art {
+      min-height: 180px;
+      padding: 24px;
+      background: var(--pale);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .project-art.dark {
+      background: #263b36;
+      color: white;
+    }
+
+    .mini-label {
+      font-size: .72rem;
+      letter-spacing: 1.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .mock-title {
+      font-size: 1.8rem;
+      line-height: 1.2;
+      font-weight: 850;
+      max-width: 240px;
+    }
+
+    .project-body { padding: 23px; }
+
+    .tag {
+      display: inline-block;
+      font-size: .72rem;
+      font-weight: 800;
+      padding: 5px 9px;
+      background: #f0f1ed;
+      border-radius: 6px;
+      margin-bottom: 12px;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .step-no {
+      color: var(--accent);
+      font-weight: 850;
+      font-size: .85rem;
+      margin-bottom: 14px;
+    }
+
+    .contact-box {
+      background: #203c35;
+      color: white;
+      padding: clamp(28px, 6vw, 60px);
+      border-radius: 28px;
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .contact-box .muted { color: #d0ddd7; }
+    .contact-box .eyebrow { color: #a8d9c6; }
+    .contact-box h2 { margin-top: 12px; }
+
+    .contact-box .btn {
+      background: white;
+      color: #203c35;
+      border-color: white;
+    }
+
+    .faq details {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .faq summary {
+      cursor: pointer;
+      font-weight: 750;
+    }
+
+    .faq details p {
+      color: var(--muted);
+      margin-bottom: 0;
+    }
+
+    footer {
+      padding: 30px 0;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: .86rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 760px) {
+      .links { gap: 12px; }
+      .links a:not(.btn) { display: none; }
+      .hero { padding: 76px 0 65px; }
+      h1 { letter-spacing: -1.8px; }
+      section { padding: 58px 0; }
+      .grid { grid-template-columns: 1fr; }
+      .steps { grid-template-columns: 1fr 1fr; }
+      .contact-box { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 400px) {
+      .container { width: 92%; }
+      .steps { grid-template-columns: 1fr; }
+      .btn { padding: 11px 15px; }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <nav class="container" aria-label="Main navigation">
+      <a class="logo" href="#home">TheIz<span>.</span></a>
+
+      <div class="links">
+        <a href="#services">Services</a>
+        <a href="#portfolio">Portfolio</a>
+        <a href="#process">Process</a>
+        <a class="btn" href="#contact">Let's Talk</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero container" id="home">
+      <div class="eyebrow">TheIz Web Studio · Malaysia</div>
+
+      <h1>We build websites that help businesses <em>move forward.</em></h1>
+
+      <p class="intro">
+        From professional business websites to custom web systems,
+        we create practical digital solutions that simplify everyday
+        operations and help your business grow.
+      </p>
+
+      <div class="actions">
+        <a class="btn" href="#contact">Discuss Your Project ↗</a>
+        <a class="btn outline" href="#portfolio">Explore Our Work</a>
+      </div>
+
+      <p class="note">
+        Business Websites · Booking Systems · Dashboards · Custom Solutions
+      </p>
+    </section>
+
+    <section id="services">
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow">What We Do</div>
+          <h2>Digital solutions for real business needs.</h2>
+          <p class="muted">
+            Start with what your business needs today. Add more
+            functionality as your business grows.
+          </p>
+        </div>
+
+        <div class="grid">
+          <article class="card">
+            <div class="symbol">↗</div>
+            <h3>Business Websites</h3>
+            <p>
+              Professional websites that showcase your services,
+              pricing, gallery and contact information.
+            </p>
+            <div class="price">From RM600</div>
+            <p>Final pricing depends on pages and features.</p>
+          </article>
+
+          <article class="card">
+            <div class="symbol">▦</div>
+            <h3>Booking Systems</h3>
+            <p>
+              Organise appointments, available time slots and
+              customer information in one place.
+            </p>
+            <div class="price">From RM1,500</div>
+            <p>Based on your workflow and requirements.</p>
+          </article>
+
+          <article class="card">
+            <div class="symbol">⌘</div>
+            <h3>Custom Web Systems</h3>
+            <p>
+              Dashboards, transaction records, reports and
+              workflows tailored to your business.
+            </p>
+            <div class="price">Custom Quote</div>
+            <p>Scope and pricing agreed before development.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="soft" id="portfolio">
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow">Selected Work</div>
+          <h2>Ideas brought to life.</h2>
+          <p class="muted">
+            These are concept demos created to demonstrate possible
+            designs and features, not claims of completed client projects.
+          </p>
+        </div>
+
+        <div class="grid">
+          <article class="card project">
+            <div class="project-art">
+              <span class="mini-label">Demo 01 · Website</span>
+              <div class="mock-title">Your business, presented better.</div>
+              <span>Services · Pricing · Contact</span>
+            </div>
+            <div class="project-body">
+              <span class="tag">BUSINESS WEBSITE</span>
+              <h3>Website for a Local Business</h3>
+              <p>
+                A business landing page with service information,
+                operating details and clear contact actions.
+              </p>
+            </div>
+          </article>
+
+          <article class="card project">
+            <div class="project-art dark">
+              <span class="mini-label">Demo 02 · Web System</span>
+              <div class="mock-title">Bookings, organised.</div>
+              <span>Appointments · Customers · Status</span>
+            </div>
+            <div class="project-body">
+              <span class="tag">CUSTOM WEB SYSTEM</span>
+              <h3>Booking Dashboard</h3>
+              <p>
+                A system concept for reviewing appointments and
+                keeping customer records organised.
+              </p>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="symbol">＋</div>
+            <h3>Your Project Could Be Next</h3>
+            <p>
+              Tell us about the challenge you want to solve.
+              We'll help define the scope before development begins.
+            </p>
+            <div style="margin-top:20px">
+              <a class="btn" href="#contact">Discuss an Idea ↗</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="process">
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow">Our Process</div>
+          <h2>Clear from start to handover.</h2>
+        </div>
+
+        <div class="steps">
+          <article>
+            <div class="step-no">01 / DISCOVERY</div>
+            <h3>Understand Your Needs</h3>
+            <p class="muted">
+              Discuss your goals, users and required features.
+            </p>
+          </article>
+
+          <article>
+            <div class="step-no">02 / PROPOSAL</div>
+            <h3>Define the Scope</h3>
+            <p class="muted">
+              Agree on pricing, timeline, recurring costs and deliverables.
+            </p>
+          </article>
+
+          <article>
+            <div class="step-no">03 / DEVELOPMENT</div>
+            <h3>Build and Test</h3>
+            <p class="muted">
+              Develop the project and review the demo together.
+            </p>
+          </article>
+
+          <article>
+            <div class="step-no">04 / HANDOVER</div>
+            <h3>Launch and Handover</h3>
+            <p class="muted">
+              Complete testing and hand over the project as agreed.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="soft faq" id="faq">
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow">Frequently Asked Questions</div>
+          <h2>Good to know before we begin.</h2>
+        </div>
+
+        <details>
+          <summary>How long does a website take to build?</summary>
+          <p>
+            It depends on the scope, content and feedback turnaround.
+            An estimated timeline will be included in your proposal.
+          </p>
+        </details>
+
+        <details>
+          <summary>Are domain and hosting included in the price?</summary>
+          <p>
+            Development fees and recurring domain, hosting or database
+            costs are separate unless specifically included in the proposal.
+            All recurring costs will be explained before work begins.
+          </p>
+        </details>
+
+        <details>
+          <summary>Can you build features specifically for my business?</summary>
+          <p>
+            Yes. We'll assess your requirements, complexity, security
+            needs and budget before confirming the scope and price.
+          </p>
+        </details>
+
+        <details>
+          <summary>How do I start a project?</summary>
+          <p>
+            Contact us with a brief description of your business,
+            the problem you want to solve and the features you need.
+            We'll discuss the scope and prepare a proposal.
+          </p>
+        </details>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="contact-box">
+          <div>
+            <div class="eyebrow">Let's Work Together</div>
+            <h2>Have an idea for your business?</h2>
+            <p class="muted">
+              Tell us what you have in mind. We'll start by understanding
+              your needs, then work out a suitable scope and budget.
+            </p>
+          </div>
+
+          <div>
+            <p class="muted">
+              Share a few details about your project to start the conversation.
+            </p>
+            <a class="btn" id="contactLink" href="#contact">
+              Request a Quote ↗
+            </a>
+            <p class="muted" style="font-size:.8rem;margin-top:12px">
+              Contact details must be configured before the website is
+              promoted publicly.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <span><strong>TheIz Web Studio</strong> · Websites & Custom Systems</span>
+      <span>© <span id="year"></span> TheIz. All rights reserved.</span>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+
+    // Add your business email here before launch.
+    const businessEmail = "";
+
+    const contactLink = document.getElementById("contactLink");
+
+    if (businessEmail.trim()) {
+      contactLink.href =
+        "mailto:" + businessEmail.trim() +
+        "?subject=" +
+        encodeURIComponent("Project Inquiry - TheIz Web Studio") +
+        "&body=" +
+        encodeURIComponent(
+          "Hello TheIz Web Studio,\n\n" +
+          "I'd like to discuss a project.\n\n" +
+          "Business name:\n" +
+          "Project type:\n" +
+          "Required features:\n" +
+          "Estimated budget:\n"
+        );
+    } else {
+      contactLink.addEventListener("click", function(event) {
+        event.preventDefault();
+        alert(
+          "The contact email has not been configured yet. " +
+          "Please update the businessEmail value in the website code."
+        );
+      });
+    }
+  </script>
+</body>
+</html>
