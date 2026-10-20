@@ -3,23 +3,33 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f8f7f3">
-  <meta name="description" content="TheIz Web Studio builds professional business websites and custom web systems for small businesses.">
-  <title>TheIz Web Studio | Websites & Custom Systems</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>TheIz Web Studio | Websites & Custom Web Systems</title>
+
+  <meta name="description" content="TheIz Web Studio builds professional business websites, booking systems and custom web solutions for small businesses in Malaysia.">
+
+  <meta name="theme-color" content="#f7f5ef">
 
   <style>
     :root {
-      --bg: #f8f7f3;
-      --paper: #ffffff;
-      --ink: #202b29;
-      --muted: #68736f;
-      --accent: #286b60;
-      --pale: #e2eee8;
-      --line: #e3e5df;
+      --background: #f7f5ef;
+      --surface: #ffffff;
+      --text: #242b27;
+      --muted: #68736c;
+      --accent: #527762;
+      --accent-dark: #3b5b47;
+      --accent-light: #e8eee7;
+      --border: #e4e5dc;
+      --radius: 20px;
+      --shadow: 0 12px 35px rgba(36, 43, 39, 0.06);
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
     html {
       scroll-behavior: smooth;
@@ -27,611 +37,1634 @@
     }
 
     body {
-      margin: 0;
-      background: var(--bg);
-      color: var(--ink);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--background);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
       line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
     }
 
-    a { color: inherit; }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    button {
+      font: inherit;
+    }
 
     .container {
-      width: min(1080px, 90%);
-      margin: auto;
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
     }
 
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 5;
-      background: rgba(248, 247, 243, .95);
-      border-bottom: 1px solid var(--line);
-      backdrop-filter: blur(12px);
+    .section {
+      padding: 100px 0;
     }
 
-    nav {
-      min-height: 72px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
+    .section-heading {
+      max-width: 650px;
+      margin-bottom: 42px;
     }
 
-    .logo {
-      font-size: 1.35rem;
-      font-weight: 850;
-      letter-spacing: -1px;
-      text-decoration: none;
+    .eyebrow {
+      display: inline-block;
+      color: var(--accent-dark);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 15px;
     }
 
-    .logo span { color: var(--accent); }
-
-    .links {
-      display: flex;
-      gap: 23px;
-      align-items: center;
+    h1,
+    h2,
+    h3 {
+      line-height: 1.2;
+      letter-spacing: -0.7px;
     }
 
-    .links a {
-      font-size: .9rem;
-      text-decoration: none;
-      font-weight: 600;
+    h1 {
+      font-size: clamp(42px, 6vw, 70px);
+      max-width: 760px;
+      margin-bottom: 24px;
     }
 
-    .links a:hover { color: var(--accent); }
+    h2 {
+      font-size: clamp(30px, 4vw, 44px);
+      margin-bottom: 18px;
+    }
+
+    h3 {
+      font-size: 21px;
+      margin-bottom: 12px;
+    }
+
+    p {
+      color: var(--muted);
+    }
+
+    .section-heading > p {
+      font-size: 16px;
+      max-width: 580px;
+    }
 
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      background: var(--accent);
-      color: white;
-      text-decoration: none;
-      padding: 12px 20px;
+      gap: 9px;
+      padding: 13px 21px;
       border-radius: 999px;
+      border: 1px solid transparent;
+      font-size: 14px;
       font-weight: 700;
-      border: 1px solid var(--accent);
-      transition: .2s;
+      cursor: pointer;
+      transition: 0.2s ease;
+      text-align: center;
     }
 
     .btn:hover {
       transform: translateY(-2px);
-      background: #1d5149;
     }
 
-    .btn.outline {
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-dark);
+    }
+
+    .btn-secondary {
+      border-color: var(--border);
       background: transparent;
-      color: var(--accent);
+      color: var(--text);
     }
 
-    .hero { padding: 100px 0 90px; }
-
-    .eyebrow {
-      color: var(--accent);
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      font-size: .75rem;
-      font-weight: 800;
+    .btn-secondary:hover {
+      background: var(--surface);
     }
 
-    h1 {
-      font-size: clamp(2.7rem, 7vw, 5.3rem);
-      line-height: 1.06;
-      letter-spacing: -3px;
-      max-width: 850px;
-      margin: 18px 0 22px;
+    .btn-white {
+      background: #fff;
+      color: var(--accent-dark);
     }
 
-    h1 em {
-      color: var(--accent);
-      font-style: normal;
+    .btn-small {
+      padding: 10px 15px;
+      font-size: 13px;
     }
 
-    .intro {
-      max-width: 620px;
-      color: var(--muted);
-      font-size: 1.1rem;
+    /* Navigation */
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(247, 245, 239, 0.94);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(228, 229, 220, 0.8);
     }
 
-    .actions {
+    .nav-inner {
+      min-height: 76px;
       display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-top: 30px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 25px;
     }
 
-    .note {
+    .brand {
+      font-size: 21px;
+      font-weight: 800;
+      letter-spacing: -0.8px;
+      white-space: nowrap;
+    }
+
+    .brand span {
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .nav-links > a:not(.btn) {
       color: var(--muted);
-      font-size: .84rem;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .nav-links > a:not(.btn):hover {
+      color: var(--accent-dark);
+    }
+
+    .menu-toggle {
+      display: none;
+      padding: 8px 12px;
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      cursor: pointer;
+      color: var(--text);
+    }
+
+    /* Hero */
+
+    .hero {
+      padding: 100px 0 90px;
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      align-items: center;
+      gap: 65px;
+    }
+
+    .hero-copy > p {
+      max-width: 570px;
+      font-size: 17px;
+      margin-bottom: 30px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .hero-note {
+      margin-top: 24px;
+      font-size: 12px;
+    }
+
+    .hero-visual {
+      position: relative;
+      min-height: 390px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .visual-backdrop {
+      position: absolute;
+      inset: 10px 0 10px 20px;
+      background: #e6ebe0;
+      border-radius: 42% 58% 60% 40% / 42% 42% 58% 58%;
+      transform: rotate(-5deg);
+    }
+
+    .browser-card {
+      position: relative;
+      width: 100%;
+      max-width: 390px;
+      background: var(--surface);
+      border: 1px solid rgba(228, 229, 220, 0.9);
+      border-radius: 17px;
+      padding: 18px;
+      box-shadow: 0 24px 70px rgba(36, 43, 39, 0.12);
+      transform: rotate(2deg);
+    }
+
+    .browser-top {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .browser-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #d6d9d0;
+    }
+
+    .browser-address {
+      flex: 1;
+      margin-left: 8px;
+      padding: 5px 10px;
+      background: #f5f5f0;
+      border-radius: 6px;
+      color: #7c847d;
+      font-size: 10px;
+    }
+
+    .mockup-content {
+      padding: 25px 10px 12px;
+    }
+
+    .mockup-label {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .mockup-title {
+      font-size: 31px;
+      line-height: 1.15;
+      margin: 12px 0;
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+
+    .mockup-description {
+      font-size: 12px;
+      max-width: 240px;
+      line-height: 1.7;
+    }
+
+    .mockup-blocks {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
       margin-top: 24px;
     }
 
-    section { padding: 76px 0; }
-
-    .section-head {
-      max-width: 650px;
-      margin-bottom: 32px;
+    .mockup-block {
+      height: 95px;
+      border-radius: 10px;
+      background: #e9eee6;
     }
 
-    h2 {
-      font-size: clamp(2rem, 4vw, 3rem);
-      line-height: 1.15;
-      letter-spacing: -1.5px;
-      margin: 10px 0 15px;
+    .mockup-block:last-child {
+      background: #f0e9db;
     }
 
-    .muted { color: var(--muted); }
+    .floating-note {
+      position: absolute;
+      bottom: 20px;
+      left: 0;
+      background: #fff;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      border-radius: 13px;
+      padding: 14px 17px;
+      font-size: 12px;
+      font-weight: 700;
+    }
 
-    .grid {
+    .floating-note span {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 400;
+    }
+
+    /* Trust strip */
+
+    .trust-strip {
+      padding: 22px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .trust-items {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 18px 50px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    /* Services */
+
+    .services-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
+      gap: 20px;
     }
 
-    .card {
-      background: var(--paper);
-      border: 1px solid var(--line);
-      border-radius: 20px;
+    .service-card {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 30px;
+      transition: 0.25s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow);
+    }
+
+    .service-icon {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: var(--accent-light);
+      font-size: 22px;
+      margin-bottom: 22px;
+    }
+
+    .service-card > p {
+      font-size: 14px;
+      margin-bottom: 18px;
+    }
+
+    .service-card ul {
+      padding-left: 18px;
+      margin-bottom: 26px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .service-card li {
+      margin: 8px 0;
+    }
+
+    .service-price {
+      font-size: 21px;
+      font-weight: 800;
+      margin-top: auto;
+      margin-bottom: 18px;
+    }
+
+    .service-price small {
+      display: block;
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--muted);
+      margin-top: 3px;
+    }
+
+    .service-card .btn {
+      width: 100%;
+    }
+
+    /* About */
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      align-items: center;
+      gap: 70px;
+    }
+
+    .about-panel {
+      background: #e9eee6;
+      border-radius: 28px;
+      padding: 40px;
+    }
+
+    .about-panel h3 {
+      font-size: 27px;
+      margin-bottom: 15px;
+    }
+
+    .about-panel p {
+      font-size: 14px;
+    }
+
+    .about-list {
+      display: grid;
+      gap: 18px;
+      margin-top: 25px;
+    }
+
+    .about-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .check {
+      flex: 0 0 27px;
+      width: 27px;
+      height: 27px;
+      display: grid;
+      place-items: center;
+      background: var(--accent-light);
+      color: var(--accent-dark);
+      border-radius: 50%;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .about-item h3 {
+      font-size: 15px;
+      margin-bottom: 5px;
+      letter-spacing: 0;
+    }
+
+    .about-item p {
+      font-size: 13px;
+    }
+
+    /* Portfolio */
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .project-card {
+      overflow: hidden;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+
+    .project-preview {
+      min-height: 255px;
+      padding: 25px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .preview-business {
+      background: #e9eee6;
+    }
+
+    .preview-booking {
+      background: #eee6da;
+    }
+
+    .preview-window {
+      width: 100%;
+      max-width: 390px;
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(36, 43, 39, 0.10);
+    }
+
+    .preview-nav {
+      padding: 12px 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #eee;
+      font-size: 9px;
+      font-weight: 700;
+    }
+
+    .preview-nav span:last-child {
+      padding: 5px 9px;
+      background: var(--accent);
+      color: #fff;
+      border-radius: 5px;
+    }
+
+    .preview-body {
+      padding: 22px 18px;
+    }
+
+    .preview-body h3 {
+      font-size: 24px;
+      margin: 7px 0;
+    }
+
+    .preview-body p {
+      font-size: 10px;
+    }
+
+    .preview-bars {
+      display: flex;
+      gap: 8px;
+      margin-top: 17px;
+    }
+
+    .preview-bars span {
+      height: 42px;
+      flex: 1;
+      border-radius: 5px;
+      background: #e8eee7;
+    }
+
+    .preview-bars span:nth-child(2) {
+      background: #f0e8d9;
+    }
+
+    .preview-bars span:nth-child(3) {
+      background: #e6e9ef;
+    }
+
+    .booking-row {
+      display: flex;
+      gap: 8px;
+      margin-top: 13px;
+    }
+
+    .booking-field {
+      flex: 1;
+      padding: 9px;
+      border: 1px solid #e7e4dc;
+      border-radius: 5px;
+      color: #7a8079;
+      font-size: 9px;
+    }
+
+    .booking-submit {
+      padding: 9px 12px;
+      background: var(--accent);
+      color: #fff;
+      border-radius: 5px;
+      font-size: 9px;
+    }
+
+    .project-info {
       padding: 25px;
     }
 
-    .symbol {
-      width: 46px;
-      height: 46px;
-      display: grid;
-      place-items: center;
-      background: var(--pale);
-      border-radius: 14px;
-      color: var(--accent);
-      font-size: 1.35rem;
-      font-weight: 800;
-      margin-bottom: 20px;
+    .project-info > p {
+      font-size: 14px;
+      margin-bottom: 17px;
     }
 
-    h3 {
-      font-size: 1.15rem;
-      margin: 0 0 9px;
-    }
-
-    .card p {
-      margin: 0;
-      color: var(--muted);
-      font-size: .94rem;
-    }
-
-    .price {
-      font-size: 1.5rem;
-      font-weight: 850;
-      margin: 15px 0 5px;
-    }
-
-    .soft { background: #eff1eb; }
-
-    .project {
-      overflow: hidden;
-      padding: 0;
-    }
-
-    .project-art {
-      min-height: 180px;
-      padding: 24px;
-      background: var(--pale);
+    .tag-list {
       display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 7px;
     }
-
-    .project-art.dark {
-      background: #263b36;
-      color: white;
-    }
-
-    .mini-label {
-      font-size: .72rem;
-      letter-spacing: 1.5px;
-      font-weight: 800;
-      text-transform: uppercase;
-    }
-
-    .mock-title {
-      font-size: 1.8rem;
-      line-height: 1.2;
-      font-weight: 850;
-      max-width: 240px;
-    }
-
-    .project-body { padding: 23px; }
 
     .tag {
-      display: inline-block;
-      font-size: .72rem;
-      font-weight: 800;
-      padding: 5px 9px;
-      background: #f0f1ed;
-      border-radius: 6px;
-      margin-bottom: 12px;
+      padding: 5px 10px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 11px;
     }
 
-    .steps {
+    .portfolio-note {
+      font-size: 12px;
+      margin-top: 20px;
+    }
+
+    /* Process */
+
+    .process-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 18px;
+      gap: 20px;
     }
 
-    .step-no {
+    .process-step {
+      padding: 25px 20px;
+      border-top: 2px solid var(--border);
+    }
+
+    .step-number {
+      font-size: 12px;
       color: var(--accent);
-      font-weight: 850;
-      font-size: .85rem;
-      margin-bottom: 14px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      margin-bottom: 22px;
     }
 
-    .contact-box {
-      background: #203c35;
-      color: white;
-      padding: clamp(28px, 6vw, 60px);
-      border-radius: 28px;
+    .process-step h3 {
+      font-size: 18px;
+    }
+
+    .process-step p {
+      font-size: 13px;
+    }
+
+    /* FAQ */
+
+    .faq-list {
+      max-width: 800px;
       display: grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap: 32px;
-      align-items: center;
+      gap: 12px;
     }
 
-    .contact-box .muted { color: #d0ddd7; }
-    .contact-box .eyebrow { color: #a8d9c6; }
-    .contact-box h2 { margin-top: 12px; }
-
-    .contact-box .btn {
-      background: white;
-      color: #203c35;
-      border-color: white;
+    .faq-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px 23px;
     }
 
-    .faq details {
-      padding: 20px 0;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .faq summary {
+    .faq-item summary {
       cursor: pointer;
-      font-weight: 750;
+      font-weight: 700;
+      font-size: 15px;
     }
 
-    .faq details p {
-      color: var(--muted);
-      margin-bottom: 0;
+    .faq-item p {
+      padding-top: 13px;
+      font-size: 14px;
     }
+
+    /* Contact */
+
+    .contact-section {
+      padding: 30px 0 100px;
+    }
+
+    .contact-panel {
+      display: grid;
+      grid-template-columns: 1fr 0.8fr;
+      gap: 50px;
+      align-items: center;
+      background: var(--accent-dark);
+      border-radius: 28px;
+      padding: 55px;
+      color: #fff;
+    }
+
+    .contact-panel .eyebrow {
+      color: #d7e4d8;
+    }
+
+    .contact-panel h2 {
+      max-width: 520px;
+    }
+
+    .contact-panel p {
+      color: #e0e7df;
+      font-size: 14px;
+      max-width: 520px;
+    }
+
+    .contact-actions {
+      display: grid;
+      gap: 12px;
+    }
+
+    .contact-option {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 13px;
+      transition: 0.2s ease;
+    }
+
+    .contact-option:hover {
+      background: rgba(255, 255, 255, 0.15);
+      transform: translateY(-2px);
+    }
+
+    .contact-option-icon {
+      flex: 0 0 43px;
+      height: 43px;
+      display: grid;
+      place-items: center;
+      background: rgba(255, 255, 255, 0.14);
+      border-radius: 11px;
+      font-size: 19px;
+    }
+
+    .contact-option strong {
+      display: block;
+      font-size: 14px;
+    }
+
+    .contact-option small {
+      display: block;
+      color: #d0ddd0;
+      font-size: 11px;
+      overflow-wrap: anywhere;
+    }
+
+    /* Footer */
 
     footer {
-      padding: 30px 0;
-      border-top: 1px solid var(--line);
-      color: var(--muted);
-      font-size: .86rem;
+      border-top: 1px solid var(--border);
+      padding: 28px 0;
     }
 
     .footer-inner {
       display: flex;
+      align-items: center;
       justify-content: space-between;
       gap: 20px;
-      flex-wrap: wrap;
     }
 
-    @media (max-width: 760px) {
-      .links { gap: 12px; }
-      .links a:not(.btn) { display: none; }
-      .hero { padding: 76px 0 65px; }
-      h1 { letter-spacing: -1.8px; }
-      section { padding: 58px 0; }
-      .grid { grid-template-columns: 1fr; }
-      .steps { grid-template-columns: 1fr 1fr; }
-      .contact-box { grid-template-columns: 1fr; }
+    .footer-inner p {
+      font-size: 12px;
     }
 
-    @media (max-width: 400px) {
-      .container { width: 92%; }
-      .steps { grid-template-columns: 1fr; }
-      .btn { padding: 11px 15px; }
+    .footer-links {
+      display: flex;
+      gap: 18px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* Responsive */
+
+    @media (max-width: 900px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 35px;
+      }
+
+      .hero-copy {
+        text-align: center;
+      }
+
+      .hero-copy > p {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .hero-actions {
+        justify-content: center;
+      }
+
+      .hero-visual {
+        max-width: 500px;
+        width: 100%;
+        margin: 0 auto;
+      }
+
+      .services-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .service-card:last-child {
+        grid-column: 1 / -1;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 35px;
+      }
+
+      .contact-panel {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .process-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .container {
+        width: min(100% - 32px, 1120px);
+      }
+
+      .section {
+        padding: 72px 0;
+      }
+
+      .nav-inner {
+        min-height: 68px;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 68px;
+        left: 0;
+        right: 0;
+        padding: 22px 20px;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 18px;
+        background: var(--background);
+        border-bottom: 1px solid var(--border);
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .nav-links .btn {
+        width: 100%;
+      }
+
+      .hero {
+        padding: 70px 0 60px;
+      }
+
+      h1 {
+        font-size: clamp(38px, 11vw, 54px);
+      }
+
+      .hero-copy > p {
+        font-size: 15px;
+      }
+
+      .hero-actions .btn {
+        width: 100%;
+      }
+
+      .hero-visual {
+        min-height: 320px;
+      }
+
+      .browser-card {
+        padding: 13px;
+      }
+
+      .mockup-title {
+        font-size: 27px;
+      }
+
+      .floating-note {
+        bottom: 0;
+        left: -3px;
+      }
+
+      .trust-items {
+        gap: 12px 22px;
+        font-size: 11px;
+      }
+
+      .services-grid,
+      .portfolio-grid,
+      .process-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .service-card:last-child {
+        grid-column: auto;
+      }
+
+      .service-card {
+        padding: 25px;
+      }
+
+      .about-panel {
+        padding: 27px;
+      }
+
+      .project-preview {
+        min-height: 220px;
+        padding: 18px;
+      }
+
+      .process-step {
+        padding: 20px;
+      }
+
+      .contact-section {
+        padding-bottom: 70px;
+      }
+
+      .contact-panel {
+        padding: 30px 23px;
+        border-radius: 22px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .footer-links {
+        flex-wrap: wrap;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+      }
     }
   </style>
 </head>
 
 <body>
-  <header>
-    <nav class="container" aria-label="Main navigation">
-      <a class="logo" href="#home">TheIz<span>.</span></a>
 
-      <div class="links">
+  <!-- Navigation -->
+
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="#home" class="brand" aria-label="TheIz Web Studio home">
+        TheIz <span>Web Studio.</span>
+      </a>
+
+      <button
+        class="menu-toggle"
+        id="menuToggle"
+        type="button"
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+        aria-controls="navLinks"
+      >
+        Menu ☰
+      </button>
+
+      <nav class="nav-links" id="navLinks">
         <a href="#services">Services</a>
+        <a href="#about">About</a>
         <a href="#portfolio">Portfolio</a>
         <a href="#process">Process</a>
-        <a class="btn" href="#contact">Let's Talk</a>
-      </div>
-    </nav>
+        <a href="#faq">FAQ</a>
+        <a href="#contact" class="btn btn-primary btn-small">
+          Let's Talk
+        </a>
+      </nav>
+    </div>
   </header>
 
   <main>
-    <section class="hero container" id="home">
-      <div class="eyebrow">TheIz Web Studio · Malaysia</div>
 
-      <h1>We build websites that help businesses <em>move forward.</em></h1>
+    <!-- Hero -->
 
-      <p class="intro">
-        From professional business websites to custom web systems,
-        we create practical digital solutions that simplify everyday
-        operations and help your business grow.
-      </p>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
 
-      <div class="actions">
-        <a class="btn" href="#contact">Discuss Your Project ↗</a>
-        <a class="btn outline" href="#portfolio">Explore Our Work</a>
-      </div>
+        <div class="hero-copy">
+          <span class="eyebrow">Independent Web Studio · Malaysia</span>
 
-      <p class="note">
-        Business Websites · Booking Systems · Dashboards · Custom Solutions
-      </p>
-    </section>
+          <h1>
+            Websites that work for your
+            <span style="color: var(--accent);">business.</span>
+          </h1>
 
-    <section id="services">
-      <div class="container">
-        <div class="section-head">
-          <div class="eyebrow">What We Do</div>
-          <h2>Digital solutions for real business needs.</h2>
-          <p class="muted">
-            Start with what your business needs today. Add more
-            functionality as your business grows.
-          </p>
-        </div>
-
-        <div class="grid">
-          <article class="card">
-            <div class="symbol">↗</div>
-            <h3>Business Websites</h3>
-            <p>
-              Professional websites that showcase your services,
-              pricing, gallery and contact information.
-            </p>
-            <div class="price">From RM600</div>
-            <p>Final pricing depends on pages and features.</p>
-          </article>
-
-          <article class="card">
-            <div class="symbol">▦</div>
-            <h3>Booking Systems</h3>
-            <p>
-              Organise appointments, available time slots and
-              customer information in one place.
-            </p>
-            <div class="price">From RM1,500</div>
-            <p>Based on your workflow and requirements.</p>
-          </article>
-
-          <article class="card">
-            <div class="symbol">⌘</div>
-            <h3>Custom Web Systems</h3>
-            <p>
-              Dashboards, transaction records, reports and
-              workflows tailored to your business.
-            </p>
-            <div class="price">Custom Quote</div>
-            <p>Scope and pricing agreed before development.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="soft" id="portfolio">
-      <div class="container">
-        <div class="section-head">
-          <div class="eyebrow">Selected Work</div>
-          <h2>Ideas brought to life.</h2>
-          <p class="muted">
-            These are concept demos created to demonstrate possible
-            designs and features, not claims of completed client projects.
-          </p>
-        </div>
-
-        <div class="grid">
-          <article class="card project">
-            <div class="project-art">
-              <span class="mini-label">Demo 01 · Website</span>
-              <div class="mock-title">Your business, presented better.</div>
-              <span>Services · Pricing · Contact</span>
-            </div>
-            <div class="project-body">
-              <span class="tag">BUSINESS WEBSITE</span>
-              <h3>Website for a Local Business</h3>
-              <p>
-                A business landing page with service information,
-                operating details and clear contact actions.
-              </p>
-            </div>
-          </article>
-
-          <article class="card project">
-            <div class="project-art dark">
-              <span class="mini-label">Demo 02 · Web System</span>
-              <div class="mock-title">Bookings, organised.</div>
-              <span>Appointments · Customers · Status</span>
-            </div>
-            <div class="project-body">
-              <span class="tag">CUSTOM WEB SYSTEM</span>
-              <h3>Booking Dashboard</h3>
-              <p>
-                A system concept for reviewing appointments and
-                keeping customer records organised.
-              </p>
-            </div>
-          </article>
-
-          <article class="card">
-            <div class="symbol">＋</div>
-            <h3>Your Project Could Be Next</h3>
-            <p>
-              Tell us about the challenge you want to solve.
-              We'll help define the scope before development begins.
-            </p>
-            <div style="margin-top:20px">
-              <a class="btn" href="#contact">Discuss an Idea ↗</a>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="process">
-      <div class="container">
-        <div class="section-head">
-          <div class="eyebrow">Our Process</div>
-          <h2>Clear from start to handover.</h2>
-        </div>
-
-        <div class="steps">
-          <article>
-            <div class="step-no">01 / DISCOVERY</div>
-            <h3>Understand Your Needs</h3>
-            <p class="muted">
-              Discuss your goals, users and required features.
-            </p>
-          </article>
-
-          <article>
-            <div class="step-no">02 / PROPOSAL</div>
-            <h3>Define the Scope</h3>
-            <p class="muted">
-              Agree on pricing, timeline, recurring costs and deliverables.
-            </p>
-          </article>
-
-          <article>
-            <div class="step-no">03 / DEVELOPMENT</div>
-            <h3>Build and Test</h3>
-            <p class="muted">
-              Develop the project and review the demo together.
-            </p>
-          </article>
-
-          <article>
-            <div class="step-no">04 / HANDOVER</div>
-            <h3>Launch and Handover</h3>
-            <p class="muted">
-              Complete testing and hand over the project as agreed.
-            </p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="soft faq" id="faq">
-      <div class="container">
-        <div class="section-head">
-          <div class="eyebrow">Frequently Asked Questions</div>
-          <h2>Good to know before we begin.</h2>
-        </div>
-
-        <details>
-          <summary>How long does a website take to build?</summary>
           <p>
-            It depends on the scope, content and feedback turnaround.
-            An estimated timeline will be included in your proposal.
+            Thoughtfully built websites and practical web systems
+            for businesses ready to grow, work smarter and serve
+            their customers better.
           </p>
-        </details>
 
-        <details>
-          <summary>Are domain and hosting included in the price?</summary>
-          <p>
-            Development fees and recurring domain, hosting or database
-            costs are separate unless specifically included in the proposal.
-            All recurring costs will be explained before work begins.
-          </p>
-        </details>
-
-        <details>
-          <summary>Can you build features specifically for my business?</summary>
-          <p>
-            Yes. We'll assess your requirements, complexity, security
-            needs and budget before confirming the scope and price.
-          </p>
-        </details>
-
-        <details>
-          <summary>How do I start a project?</summary>
-          <p>
-            Contact us with a brief description of your business,
-            the problem you want to solve and the features you need.
-            We'll discuss the scope and prepare a proposal.
-          </p>
-        </details>
-      </div>
-    </section>
-
-    <section id="contact">
-      <div class="container">
-        <div class="contact-box">
-          <div>
-            <div class="eyebrow">Let's Work Together</div>
-            <h2>Have an idea for your business?</h2>
-            <p class="muted">
-              Tell us what you have in mind. We'll start by understanding
-              your needs, then work out a suitable scope and budget.
-            </p>
-          </div>
-
-          <div>
-            <p class="muted">
-              Share a few details about your project to start the conversation.
-            </p>
-            <a class="btn" id="contactLink" href="#contact">
-              Request a Quote ↗
+          <div class="hero-actions">
+            <a href="#contact" class="btn btn-primary">
+              Discuss Your Project →
             </a>
-            <p class="muted" style="font-size:.8rem;margin-top:12px">
-              Contact details must be configured before the website is
-              promoted publicly.
-            </p>
+
+            <a href="#services" class="btn btn-secondary">
+              Explore Services
+            </a>
           </div>
+
+          <p class="hero-note">
+            Clear communication · Practical solutions ·
+            Project-based pricing
+          </p>
+        </div>
+
+        <div class="hero-visual" aria-label="Illustration of a business website">
+          <div class="visual-backdrop"></div>
+
+          <div class="browser-card">
+            <div class="browser-top">
+              <span class="browser-dot"></span>
+              <span class="browser-dot"></span>
+              <span class="browser-dot"></span>
+              <div class="browser-address">yourbusiness.com</div>
+            </div>
+
+            <div class="mockup-content">
+              <span class="mockup-label">Your next chapter</span>
+
+              <div class="mockup-title">
+                A better home<br>for your business.
+              </div>
+
+              <p class="mockup-description">
+                A professional online presence designed around
+                your customers and goals.
+              </p>
+
+              <div class="mockup-blocks">
+                <div class="mockup-block"></div>
+                <div class="mockup-block"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="floating-note">
+            Designed with purpose
+            <span>Built around your business needs</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Trust strip -->
+
+    <div class="trust-strip">
+      <div class="container trust-items">
+        <span>✦ Business Websites</span>
+        <span>✦ Booking Systems</span>
+        <span>✦ Custom Web Solutions</span>
+        <span>✦ Mobile-Friendly Design</span>
+      </div>
+    </div>
+
+    <!-- Services -->
+
+    <section class="section" id="services">
+      <div class="container">
+
+        <div class="section-heading">
+          <span class="eyebrow">What I Do</span>
+          <h2>Practical digital solutions for your business.</h2>
+          <p>
+            Start with a professional website or work towards
+            a more tailored system. Every project begins with
+            understanding what your business actually needs.
+          </p>
+        </div>
+
+        <div class="services-grid">
+
+          <article class="service-card">
+            <div class="service-icon" aria-hidden="true">⌘</div>
+
+            <h3>Business Websites</h3>
+
+            <p>
+              Establish a professional online presence and make
+              it easier for customers to discover your services.
+            </p>
+
+            <ul>
+              <li>Responsive website design</li>
+              <li>Services and pricing sections</li>
+              <li>WhatsApp and email contact links</li>
+              <li>Basic on-page SEO setup</li>
+            </ul>
+
+            <div class="service-price">
+              From RM600
+              <small>Final price depends on project scope.</small>
+            </div>
+
+            <a
+              href="https://wa.me/60128500418?text=Hi%20TheIz%20Web%20Studio%2C%20I%27m%20interested%20in%20a%20business%20website."
+              class="btn btn-secondary"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Enquire on WhatsApp →
+            </a>
+          </article>
+
+          <article class="service-card">
+            <div class="service-icon" aria-hidden="true">▦</div>
+
+            <h3>Booking Systems</h3>
+
+            <p>
+              Organise customer bookings and reduce the hassle
+              of managing every enquiry manually.
+            </p>
+
+            <ul>
+              <li>Online booking forms</li>
+              <li>Customer and booking records</li>
+              <li>Booking status management</li>
+              <li>Admin dashboard options</li>
+            </ul>
+
+            <div class="service-price">
+              From RM1,500
+              <small>Database and advanced features quoted separately.</small>
+            </div>
+
+            <a
+              href="https://wa.me/60128500418?text=Hi%20TheIz%20Web%20Studio%2C%20I%27m%20interested%20in%20a%20booking%20system."
+              class="btn btn-secondary"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Discuss a Booking System →
+            </a>
+          </article>
+
+          <article class="service-card">
+            <div class="service-icon" aria-hidden="true">⚙</div>
+
+            <h3>Custom Web Systems</h3>
+
+            <p>
+              Purpose-built tools to help manage your business
+              operations and everyday workflows.
+            </p>
+
+            <ul>
+              <li>Records and management dashboards</li>
+              <li>Sales and transaction tracking</li>
+              <li>User roles and access controls</li>
+              <li>Custom features based on requirements</li>
+            </ul>
+
+            <div class="service-price">
+              Custom Quote
+              <small>Based on features, complexity and maintenance needs.</small>
+            </div>
+
+            <a
+              href="https://wa.me/60128500418?text=Hi%20TheIz%20Web%20Studio%2C%20I%27d%20like%20to%20discuss%20a%20custom%20web%20system."
+              class="btn btn-secondary"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Discuss Your Requirements →
+            </a>
+          </article>
+
         </div>
       </div>
     </section>
+
+    <!-- About -->
+
+    <section class="section" id="about">
+      <div class="container about-grid">
+
+        <div class="about-panel">
+          <span class="eyebrow">The Studio Approach</span>
+
+          <h3>Good technology should make work easier.</h3>
+
+          <p>
+            A website should do more than look attractive.
+            It should help customers understand your business,
+            find the information they need and take the next step.
+          </p>
+        </div>
+
+        <div>
+          <span class="eyebrow">Why TheIz Web Studio</span>
+
+          <h2>Built around your needs, not unnecessary complexity.</h2>
+
+          <div class="about-list">
+
+            <div class="about-item">
+              <span class="check">✓</span>
+              <div>
+                <h3>Solutions with a purpose</h3>
+                <p>
+                  Features are planned around your goals rather
+                  than added just for the sake of complexity.
+                </p>
+              </div>
+            </div>
+
+            <div class="about-item">
+              <span class="check">✓</span>
+              <div>
+                <h3>Designed for everyday use</h3>
+                <p>
+                  Mobile-friendly layouts and straightforward
+                  navigation help customers use your website.
+                </p>
+              </div>
+            </div>
+
+            <div class="about-item">
+              <span class="check">✓</span>
+              <div>
+                <h3>Transparent project scope</h3>
+                <p>
+                  Discuss deliverables, costs and ongoing
+                  requirements before work begins.
+                </p>
+              </div>
+            </div>
+
+            <div class="about-item">
+              <span class="check">✓</span>
+              <div>
+                <h3>Room to grow</h3>
+                <p>
+                  Start with the essentials and plan future
+                  improvements when your business is ready.
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Portfolio -->
+
+    <section class="section" id="portfolio">
+      <div class="container">
+
+        <div class="section-heading">
+          <span class="eyebrow">Selected Concepts</span>
+          <h2>Ideas for real business needs.</h2>
+          <p>
+            These are illustrative demo concepts showing the
+            kinds of projects TheIz Web Studio aims to build.
+            They are not presented as completed client projects.
+          </p>
+        </div>
+
+        <div class="portfolio-grid">
+
+          <article class="project-card">
+            <div class="project-preview preview-business">
+              <div class="preview-window">
+
+                <div class="preview-nav">
+                  <span>YOUR BUSINESS</span>
+                  <span>Get in touch</span>
+                </div>
+
+                <div class="preview-body">
+                  <span class="mockup-label">Business Website Concept</span>
+
+                  <h3>Make a great<br>first impression.</h3>
+
+                  <p>
+                    A clean, welcoming website for a service-based business.
+                  </p>
+
+                  <div class="preview-bars">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="project-info">
+              <span class="eyebrow">Demo Concept 01</span>
+              <h3>Service Business Website</h3>
+
+              <p>
+                A potential website for local service providers
+                who need to showcase their services, pricing
+                and contact details.
+              </p>
+
+              <div class="tag-list">
+                <span class="tag">Responsive Layout</span>
+                <span class="tag">Service Listings</span>
+                <span class="tag">Contact Links</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-preview preview-booking">
+              <div class="preview-window">
+
+                <div class="preview-nav">
+                  <span>BOOKING PORTAL</span>
+                  <span>Book now</span>
+                </div>
+
+                <div class="preview-body">
+                  <span class="mockup-label">Booking System Concept</span>
+
+                  <h3>Appointments,<br>made simpler.</h3>
+
+                  <p>
+                    A concept for collecting customer booking requests.
+                  </p>
+
+                  <div class="booking-row">
+                    <div class="booking-field">Choose a service</div>
+                    <div class="booking-field">Select a date</div>
+                  </div>
+
+                  <div class="booking-row">
+                    <div class="booking-submit">Continue booking →</div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="project-info">
+              <span class="eyebrow">Demo Concept 02</span>
+              <h3>Online Booking Portal</h3>
+
+              <p>
+                A proposed booking experience for businesses
+                that want to collect requests online and manage
+                them in one place.
+              </p>
+
+              <div class="tag-list">
+                <span class="tag">Booking Form</span>
+                <span class="tag">Customer Records</span>
+                <span class="tag">Admin Dashboard Concept</span>
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+        <p class="portfolio-note">
+          Note: These previews are visual concepts only.
+          Working features, databases and admin dashboards
+          require separate implementation.
+        </p>
+
+      </div>
+    </section>
+
+    <!-- Process -->
+
+    <section class="section" id="process">
+      <div class="container">
+
+        <div class="section-heading">
+          <span class="eyebrow">How It Works</span>
+          <h2>A straightforward process from idea to launch.</h2>
+          <p>
+            Each project starts with a clear understanding of
+            the requirements, timeline and agreed deliverables.
+          </p>
+        </div>
+
+        <div class="process-grid">
+
+          <article class="process-step">
+            <div class="step-number">STEP 01</div>
+            <h3>Discovery</h3>
+            <p>
+              Discuss your business, goals, target customers
+              and the problem you want to solve.
+            </p>
+          </article>
+
+          <article class="process-step">
+            <div class="step-number">STEP 02</div>
+            <h3>Proposal</h3>
+            <p>
+              Agree on the project scope, features, pricing,
+              timeline and ongoing costs where applicable.
+            </p>
+          </article>
+
+          <article class="process-step">
+            <div class="step-number">STEP 03</div>
+            <h3>Development</h3>
+            <p>
+              Build the agreed solution, review progress
+              and test the important user journeys.
+            </p>
+          </article>
+
+          <article class="process-step">
+            <div class="step-number">STEP 04</div>
+            <h3>Launch</h3>
+            <p>
+              Publish the approved website or system and
+              explain the agreed handover and support process.
+            </p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+
+    <section class="section" id="faq">
+      <div class="container">
+
+        <div class="section-heading">
+          <span class="eyebrow">Frequently Asked Questions</span>
+          <h2>Before we get started.</h2>
+        </div>
+
+        <div class="faq-list">
+
+          <details class="faq-item">
+            <summary>How much does a website cost?</summary>
+            <p>
+              Business websites start from RM600, while booking
+              systems start from RM1,500. Final pricing depends
+              on the agreed scope, functionality and complexity.
+            </p>
+          </details>
+
+          <details class="faq-item">
+            <summary>How long will my project take?</summary>
+            <p>
+              Timelines depend on the project size, content,
+              revisions and technical requirements. A timeline
+              will be discussed before development begins.
+            </p>
+          </details>
+
+          <details class="faq-item">
+            <summary>Will there be ongoing costs?</summary>
+            <p>
+              A domain name, hosting, database, third-party
+              services or maintenance may involve recurring
+              fees. Any applicable costs should be discussed
+              before the project starts.
+            </p>
+          </details>
+
+          <details class="faq-item">
+            <summary>Can you build a system specifically for my business?</summary>
+            <p>
+              Custom systems can be planned around your workflow.
+              The available features, security requirements,
+              integrations and budget will determine the solution.
+            </p>
+          </details>
+
+          <details class="faq-item">
+            <summary>How do I request a quotation?</summary>
+            <p>
+              Contact TheIz Web Studio through WhatsApp or email.
+              Briefly describe your business, the type of project
+              you need and the features you have in mind.
+            </p>
+          </details>
+
+          <details class="faq-item">
+            <summary>Do I need to know how to code?</summary>
+            <p>
+              No. You explain what your business needs to achieve.
+              We can discuss the technical approach and the
+              information required to plan the project.
+            </p>
+          </details>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+
+    <section class="contact-section" id="contact">
+      <div class="container">
+
+        <div class="contact-panel">
+
+          <div>
+            <span class="eyebrow">Let's Build Something Useful</span>
+
+            <h2>Have a project in mind?</h2>
+
+            <p>
+              Tell me about your business, your idea or the
+              process you want to improve. Let's discuss a
+              practical solution that fits your needs.
+            </p>
+
+            <p style="margin-top: 18px;">
+              TheIz Web Studio · Malaysia
+            </p>
+          </div>
+
+          <div class="contact-actions">
+
+            <a
+              class="contact-option"
+              href="https://wa.me/60128500418?text=Hi%20TheIz%20Web%20Studio!%20I%27m%20interested%20in%20your%20web%20development%20services."
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Contact TheIz Web Studio through WhatsApp"
+            >
+              <span class="contact-option-icon" aria-hidden="true">✆</span>
+              <span>
+                <strong>Chat on WhatsApp ↗</strong>
+                <small>+60 12-850 0418</small>
+              </span>
+            </a>
+
+            <a
+              class="contact-option"
+              href="mailto:zrn.mails89@gmail.com?subject=Web%20Development%20Enquiry&body=Hi%20TheIz%20Web%20Studio%2C%0A%0AI%27m%20interested%20in%20your%20web%20development%20services.%0A%0AProject%20type%3A%0ABusiness%20name%3A%0AProject%20details%3A%0ABudget%20range%3A%0ATarget%20launch%20date%3A%0A"
+              aria-label="Email TheIz Web Studio"
+            >
+              <span class="contact-option-icon" aria-hidden="true">✉</span>
+              <span>
+                <strong>Send an Email ↗</strong>
+                <small>zrn.mails89@gmail.com</small>
+              </span>
+            </a>
+
+            <p style="font-size: 11px;">
+              Choose whichever contact method works best for you.
+            </p>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+
   </main>
+
+  <!-- Footer -->
 
   <footer>
     <div class="container footer-inner">
-      <span><strong>TheIz Web Studio</strong> · Websites & Custom Systems</span>
-      <span>© <span id="year"></span> TheIz. All rights reserved.</span>
+
+      <a href="#home" class="brand">
+        TheIz <span>Web Studio.</span>
+      </a>
+
+      <p>
+        © <span id="currentYear"></span> TheIz Web Studio.
+        All rights reserved.
+      </p>
+
+      <div class="footer-links">
+        <a href="#services">Services</a>
+        <a href="#portfolio">Portfolio</a>
+        <a href="#contact">Contact</a>
+      </div>
+
     </div>
   </footer>
 
   <script>
-    document.getElementById("year").textContent =
-      new Date().getFullYear();
+    // Mobile navigation
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
 
-    // Add your business email here before launch.
-    const businessEmail = "";
+    menuToggle.addEventListener("click", function () {
+      const isOpen = navLinks.classList.toggle("open");
 
-    const contactLink = document.getElementById("contactLink");
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+      menuToggle.textContent = isOpen ? "Close ✕" : "Menu ☰";
+    });
 
-    if (businessEmail.trim()) {
-      contactLink.href =
-        "mailto:" + businessEmail.trim() +
-        "?subject=" +
-        encodeURIComponent("Project Inquiry - TheIz Web Studio") +
-        "&body=" +
-        encodeURIComponent(
-          "Hello TheIz Web Studio,\n\n" +
-          "I'd like to discuss a project.\n\n" +
-          "Business name:\n" +
-          "Project type:\n" +
-          "Required features:\n" +
-          "Estimated budget:\n"
-        );
-    } else {
-      contactLink.addEventListener("click", function(event) {
-        event.preventDefault();
-        alert(
-          "The contact email has not been configured yet. " +
-          "Please update the businessEmail value in the website code."
-        );
+    // Close the mobile menu after choosing a navigation link
+    navLinks.querySelectorAll("a").forEach(function (link) {
+      link.addEventListener("click", function () {
+        navLinks.classList.remove("open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.textContent = "Menu ☰";
       });
-    }
+    });
+
+    // Automatically update the copyright year
+    document.getElementById("currentYear").textContent =
+      new Date().getFullYear();
   </script>
+
 </body>
 </html>
